@@ -23,20 +23,20 @@ go build -o slo .
 ### SLI を手動で記録する
 
 ```bash
-slo record --service natorium --total 10000 --success 9992
+slo record --service my-app --total 10000 --success 9992
 ```
 
 ### SLO 達成状況を表示する
 
 ```bash
-slo status --service natorium --target 99.9
+slo status --service my-app --target 99.9
 ```
 
 ```
 ╭───────────────────────────────────╮
 │              SLO Status           │
 │                                   │
-│  Service:        natorium         │
+│  Service:        my-app           │
 │  SLI:            99.92%           │
 │  SLO Target:     99.90%           │
 │  Status:         MEETING SLO      │
@@ -49,14 +49,14 @@ slo status --service natorium --target 99.9
 ### エラーバジェットの残量を確認する
 
 ```bash
-slo budget --service natorium --target 99.9 --window 30d
+slo budget --service my-app --target 99.9 --window 30d
 ```
 
 ```
 ╭────────────────────────────────────╮
 │               Error Budget         │
 │                                    │
-│  Service:         natorium         │
+│  Service:         my-app           │
 │  Window:          30d              │
 │  SLO Target:      99.90%           │
 │  Current SLI:     99.92%           │
@@ -72,15 +72,15 @@ slo budget --service natorium --target 99.9 --window 30d
 #### 1. サービスを初期化する
 
 ```bash
-slo init --service natorium
+slo init --service my-app
 ```
 
 対話形式で以下を設定します:
 
 | 項目 | 説明 |
 |------|------|
-| Display name | サービスの表示名（例: `natorium.dev`） |
-| URL | サイトの URL（例: `https://natorium.dev`） |
+| Display name | サービスの表示名（例: `My App`） |
+| URL | サイトの URL（例: `https://my-app.vercel.app`） |
 | Vercel API token | [Vercel Account Tokens](https://vercel.com/account/tokens) で作成 |
 | Vercel Project ID | Vercel ダッシュボードの Settings > General で確認 |
 | Vercel Team ID | チームの場合のみ。Hobby プランは空欄 |
@@ -90,17 +90,17 @@ slo init --service natorium
 #### 2. データを取得する
 
 ```bash
-slo fetch --service natorium --window 30d
+slo fetch --service my-app --window 30d
 ```
 
 #### 3. 結果を確認する
 
 ```bash
 # デプロイ成功率
-slo status --service natorium-deploy --target 99.9
+slo status --service my-app-deploy --target 99.9
 
 # 応答成功率
-slo status --service natorium-uptime --target 99.9
+slo status --service my-app-uptime --target 99.9
 ```
 
 ## コマンド一覧
@@ -127,10 +127,10 @@ slo status --service natorium-uptime --target 99.9
 
 ```
 ~/.slo/
-├── natorium.json           # サービス設定（API キー等）
-├── natorium.csv            # 手動記録の SLI データ
-├── natorium-deploy.csv     # Vercel デプロイ記録
-└── natorium-uptime.csv     # UptimeRobot 応答記録
+├── my-app.json           # サービス設定（API キー等）
+├── my-app.csv            # 手動記録の SLI データ
+├── my-app-deploy.csv     # Vercel デプロイ記録
+└── my-app-uptime.csv     # UptimeRobot 応答記録
 ```
 
 ## 無料枠での利用
